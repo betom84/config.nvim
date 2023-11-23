@@ -73,6 +73,7 @@ return {
       },
    },
 
+   -- https://github.com/nvim-telescope/telescope-file-browser.nvim
    {
       "nvim-telescope/telescope-file-browser.nvim",
       dependencies = {

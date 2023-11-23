@@ -45,7 +45,7 @@ mason_lspconfig.setup_handlers {
    function(server_name)
       require('lspconfig')[server_name].setup {
          capabilities = capabilities,
-         on_attach = require('keymaps').lsp_keymaps_on_buffer,
+         on_attach = function(_, bufnr) require('keymaps').lsp_keymaps_on_buffer(bufnr, server_name) end,
          settings = servers[server_name],
          filetypes = (servers[server_name] or {}).filetypes,
       }
@@ -127,8 +127,8 @@ vim.diagnostic.config({
    },
 })
 
--- auto show diagnostics float panel 
+-- auto show diagnostics float panel
 -- vim.cmd([[
--- set signcolumn=yes
--- autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
+--    set signcolumn=yes
+--    autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 -- ]])

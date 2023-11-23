@@ -4,6 +4,12 @@ local M = {}
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', 'Q', '<Nop>', { silent = true })
+vim.keymap.set("n", "«", ":q<CR>", { desc="quit current buffer (<A-q>)" })
+vim.keymap.set("n", "»", ":q!<CR>", { desc="force quit current buffer (<A-Q>)" })
+vim.keymap.set("n", "∑", ":w<CR>", { desc="write current buffer (<A-w>)" })
+vim.keymap.set("i", "«", "<ESC>:q<CR>", { desc="quit current buffer (<A-q>)" })
+vim.keymap.set("i", "»", "<ESC>:q!<CR>", { desc="force quit current buffer (<A-Q>)" })
+vim.keymap.set("i", "∑", "<ESC>:w<CR>", { desc="write current buffer (<A-w>)" })
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -15,8 +21,13 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "move selection down" })
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "move selection up" })
+-- Move lines
+vim.keymap.set("v", "º", ":m '>+1<CR>gv=gv", { desc = "move selection down (<A-j>)" })
+vim.keymap.set("v", "∆", ":m '<-2<CR>gv=gv", { desc = "move selection up (<A-k>)" })
+vim.keymap.set("n", "º", ":m .+1<CR>==", { desc = "move current line down (<A-j>)" })
+vim.keymap.set("n", "∆", ":m .-2<CR>==", { desc = "move current line up (<A-k>)" })
+
+-- Registers
 vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "replace and keep buffer" })
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "yank to clipboard" })
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "delete without buffer" })
@@ -28,17 +39,19 @@ vim.keymap.set("n", "<leader>Gl", require('telescope.builtin').git_commits, { de
 vim.keymap.set("n", "<leader>Gr", require('telescope.builtin').git_branches, { desc = "b[r]anches" })
 vim.keymap.set("n", "<leader>Gt", require('telescope.builtin').git_branches, { desc = "s[t]ash" })
 
--- Treesitter
+-- Diagnostics
 vim.keymap.set('n', '<leader>dp', vim.diagnostic.goto_prev, { desc = '[d]iagnostics: [p]revious message' })
 vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_next, { desc = '[d]iagnostics: [n]ext message' })
 vim.keymap.set('n', '<leader>df', vim.diagnostic.open_float, { desc = '[d]iagnostics: open [f]loating message' })
-vim.keymap.set('n', '<leader>dl', vim.diagnostic.setloclist, { desc = '[d]iagnostics: open list' })
+vim.keymap.set('n', '<leader>dl', vim.diagnostic.setloclist, { desc = '[d]iagnostics: open [l]ist' })
+vim.keymap.set('n', '<leader>dw', require('telescope.builtin').diagnostics, { desc = '[d]iagnostics: [w]orkspace' })
+vim.keymap.set('n', '<leader>dd', function() require('telescope.builtin').diagnostics({bufnr=0}) end, { desc = '[d]iagnostics: [d]ocument' })
 -- vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 -- vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 -- vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 -- vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
--- Telescope
+-- Find/open files
 vim.keymap.set('n', '<leader>fc', function()
    -- You can pass additional configuration to telescope to change theme, layout, etc.
    require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
@@ -53,7 +66,6 @@ vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { des
 vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = '[h]elp' })
 vim.keymap.set('n', '<leader>fw', require('telescope.builtin').grep_string, { desc = 'current [w]ord' })
 vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, { desc = 'by [g]rep' })
-vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = '[d]iagnostics' })
 vim.keymap.set('n', '<leader>fa', require('telescope.builtin').resume, { desc = '[a]gain' })
 vim.keymap.set('n', '<leader>fr', require('telescope.builtin').oldfiles, { desc = '[r]ecently opened files' })
 vim.keymap.set('n', '<leader>fb', require('telescope').extensions.file_browser.file_browser, { desc = '[b]rowser' })
@@ -73,7 +85,7 @@ vim.keymap.set('n', '<leader>bL', function() require('dap').set_breakpoint(nil, 
    { desc = '[l]og breakpoint' })
 
 -- LSP
-M.lsp_keymaps_on_buffer = function(_, bufnr)
+M.lsp_keymaps_on_buffer = function(bufnr, _)
    local nmap = function(keys, func, desc)
       if desc then
          desc = desc .. ' (lsp)'
