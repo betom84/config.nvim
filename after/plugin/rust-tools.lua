@@ -1,5 +1,7 @@
 local rt = require("rust-tools")
 
+local root_dir = require("lspconfig.util").root_pattern("Cargo.toml", "rust-project.json")
+
 rt.setup({
    server = {
       on_attach = function(_, bufnr)
@@ -26,6 +28,7 @@ rt.setup({
             },
          },
       },
+      root_dir = root_dir,
    },
 
    tools = {
