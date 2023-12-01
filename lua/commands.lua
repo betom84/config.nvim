@@ -1,3 +1,5 @@
+local M = {}
+
 -- Highlight on yank
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
@@ -15,8 +17,6 @@ local on_vim_enter = function(data)
    local directory = vim.fn.isdirectory(data.file) == 1
 
    if no_name or directory then
-      print("is emppry or directory")
-
       if directory then
          vim.cmd.enew()        -- create a new, empty buffer
          vim.cmd.bw(data.buf)  -- wipe the directory buffer
@@ -36,3 +36,18 @@ vim.api.nvim_create_autocmd({ 'VimEnter' }, { callback = on_vim_enter })
 
 -- convenience alias
 vim.api.nvim_create_user_command('Q', function(_) vim.cmd.quitall() end, {})
+
+-- commands to be registered on LSP attach
+M.lsp_commands_on_buffer = function(bufnr)
+   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+      vim.lsp.buf.format()
+   end, { desc = 'Format current buffer with LSP' })
+
+   vim.api.nvim_create_autocmd("BufWritePre", {
+      callback = function(_)
+         vim.cmd("Format")
+      end
+   })
+end
+
+return M

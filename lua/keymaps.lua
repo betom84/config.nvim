@@ -32,6 +32,9 @@ vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "replace and keep buffer" })
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "yank to clipboard" })
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "delete without buffer" })
 
+-- Tree
+vim.keymap.set("n", "<leader>t", ":NvimTreeToggle<CR>", { desc = "toggle [t]ree" })
+
 -- GIT
 vim.keymap.set("n", "<leader>Gb", vim.cmd.Git, { desc = "[b]rowse" })
 vim.keymap.set("n", "<leader>Gs", require('telescope.builtin').git_status, { desc = "[s]tatus" })
@@ -43,7 +46,6 @@ vim.keymap.set("n", "<leader>Gt", require('telescope.builtin').git_branches, { d
 vim.keymap.set('n', '<leader>dp', vim.diagnostic.goto_prev, { desc = '[d]iagnostics: [p]revious message' })
 vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_next, { desc = '[d]iagnostics: [n]ext message' })
 vim.keymap.set('n', '<leader>df', vim.diagnostic.open_float, { desc = '[d]iagnostics: open [f]loating message' })
-vim.keymap.set('n', '<leader>dl', vim.diagnostic.setloclist, { desc = '[d]iagnostics: open [l]ist' })
 vim.keymap.set('n', '<leader>dw', require('telescope.builtin').diagnostics, { desc = '[d]iagnostics: [w]orkspace' })
 vim.keymap.set('n', '<leader>dd', function() require('telescope.builtin').diagnostics({bufnr=0}) end, { desc = '[d]iagnostics: [d]ocument' })
 -- vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
@@ -68,6 +70,7 @@ vim.keymap.set('n', '<leader>fw', require('telescope.builtin').grep_string, { de
 vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, { desc = 'by [g]rep' })
 vim.keymap.set('n', '<leader>fa', require('telescope.builtin').resume, { desc = '[a]gain' })
 vim.keymap.set('n', '<leader>fr', require('telescope.builtin').oldfiles, { desc = '[r]ecently opened files' })
+vim.keymap.set('n', '<leader>fj', require('telescope.builtin').jumplist, { desc = '[j]umplist' })
 vim.keymap.set('n', '<leader>fb', require('telescope').extensions.file_browser.file_browser, { desc = '[b]rowser' })
 
 -- DAP
@@ -116,9 +119,6 @@ M.lsp_keymaps_on_buffer = function(bufnr, _)
    end, '[w]orkspace [l]ist folders')
 
    -- Create a command `:Format` local to the LSP buffer
-   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-      vim.lsp.buf.format()
-   end, { desc = 'Format current buffer with LSP' })
    nmap('<leader>F', vim.lsp.buf.format, '[F]ormat current buffer')
 end
 

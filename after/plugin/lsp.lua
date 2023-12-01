@@ -45,7 +45,10 @@ mason_lspconfig.setup_handlers {
    function(server_name)
       require('lspconfig')[server_name].setup {
          capabilities = capabilities,
-         on_attach = function(_, bufnr) require('keymaps').lsp_keymaps_on_buffer(bufnr, server_name) end,
+         on_attach = function(_, bufnr)
+            require('keymaps').lsp_keymaps_on_buffer(bufnr, server_name)
+            require('commands').lsp_commands_on_buffer(bufnr)
+         end,
          settings = servers[server_name],
          filetypes = (servers[server_name] or {}).filetypes,
       }
@@ -72,7 +75,18 @@ cmp.setup {
       ['<C-d>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
       ['<C-Space>'] = cmp.mapping.complete {},
-      ['<CR>'] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = true, },
+      ['<S-CR>'] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = true, },
+      -- ['<CR>'] = cmp.mapping({
+      --    i = function(fallback)
+      --       if cmp.visible() and cmp.get_active_entry() then
+      --          cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+      --       else
+      --          fallback()
+      --       end
+      --    end,
+      --    s = cmp.mapping.confirm({ select = true }),
+      --    c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+      -- }),
       ['<Tab>'] = cmp.mapping(function(fallback)
          if cmp.visible() then
             cmp.select_next_item()
@@ -118,7 +132,7 @@ vim.diagnostic.config({
    signs = true,
    update_in_insert = true,
    underline = true,
-   severity_sort = false,
+   severity_sort = true,
    float = {
       border = 'none',
       source = 'always',

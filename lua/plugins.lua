@@ -58,6 +58,7 @@ return {
       branch = '0.1.x',
       dependencies = {
          'nvim-lua/plenary.nvim',
+
          -- Fuzzy Finder Algorithm which requires local dependencies to be built.
          -- Only load if `make` is available. Make sure you have the system
          -- requirements installed.
@@ -71,6 +72,16 @@ return {
             end,
          },
       },
+   },
+
+   -- https://github.com/nvim-telescope/telescope-ui-select.nvim/tree/master
+   { 'nvim-telescope/telescope-ui-select.nvim' },
+
+   -- https://github.com/windwp/nvim-autopairs
+   {
+      'windwp/nvim-autopairs',
+      event = "InsertEnter",
+      opts = {},
    },
 
    -- https://github.com/nvim-telescope/telescope-file-browser.nvim
@@ -116,6 +127,9 @@ return {
       build = function() vim.fn["mkdp#util#install"]() end,
    },
 
+   -- https://github.com/nvim-tree/nvim-tree.lua
+   { 'nvim-tree/nvim-tree.lua', opts = {} },
+
    --[[
 
    Focus current block
@@ -132,6 +146,12 @@ return {
 
    Undo History
    https://github.com/mbbill/undotree
+
+   GO
+   https://github.com/ray-x/go.nvim
+
+   Show LSP signature while typing
+   https://github.com/ray-x/lsp_signature.nvim
 
    ]] --
 }
