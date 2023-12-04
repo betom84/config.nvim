@@ -19,6 +19,7 @@ rt.setup({
          vim.keymap.set("n", "<leader>ba", function() vim.cmd("RustDebuggables") end,
             { buffer = bufnr, desc = "[a]ttach target (rust)" })
       end,
+
       settings = {
          -- to enable rust-analyzer settings visit:
          -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
@@ -29,12 +30,18 @@ rt.setup({
             },
          },
       },
+
       root_dir = root_dir,
    },
 
    tools = {
       hover_actions = {
          border = 'none',
+      },
+
+      inlay_hints = {
+         max_len_align = true,
+         show_parameter_hints = false,
       },
    },
 

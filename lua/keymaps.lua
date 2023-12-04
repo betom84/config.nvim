@@ -4,20 +4,22 @@ local M = {}
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', 'Q', '<Nop>', { silent = true })
-vim.keymap.set("n", "«", ":q<CR>", { desc="quit current buffer (<A-q>)" })
-vim.keymap.set("n", "»", ":q!<CR>", { desc="force quit current buffer (<A-Q>)" })
-vim.keymap.set("n", "∑", ":w<CR>", { desc="write current buffer (<A-w>)" })
-vim.keymap.set("i", "«", "<ESC>:q<CR>", { desc="quit current buffer (<A-q>)" })
-vim.keymap.set("i", "»", "<ESC>:q!<CR>", { desc="force quit current buffer (<A-Q>)" })
-vim.keymap.set("i", "∑", "<ESC>:w<CR>", { desc="write current buffer (<A-w>)" })
+
+vim.keymap.set("n", "«", ":q<CR>", { desc = "quit current buffer (<A-q>)" })
+vim.keymap.set("n", "»", ":q!<CR>", { desc = "force quit current buffer (<A-Q>)" })
+vim.keymap.set("i", "«", "<ESC>:q<CR>", { desc = "quit current buffer (<A-q>)" })
+vim.keymap.set("i", "»", "<ESC>:q!<CR>", { desc = "force quit current buffer (<A-Q>)" })
+
+vim.keymap.set("n", "<C-s>", ":w<CR>", { desc = "write current buffer (<C-s>)" })
+vim.keymap.set("i", "<C-s>", "<ESC>:w<CR>", { desc = "write current buffer (<C-s>)" })
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Keep cursor centered when jumping around
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
+-- vim.keymap.set("n", "<C-d>", "<C-d>zz")
+-- vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
@@ -47,7 +49,8 @@ vim.keymap.set('n', '<leader>dp', vim.diagnostic.goto_prev, { desc = '[d]iagnost
 vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_next, { desc = '[d]iagnostics: [n]ext message' })
 vim.keymap.set('n', '<leader>df', vim.diagnostic.open_float, { desc = '[d]iagnostics: open [f]loating message' })
 vim.keymap.set('n', '<leader>dw', require('telescope.builtin').diagnostics, { desc = '[d]iagnostics: [w]orkspace' })
-vim.keymap.set('n', '<leader>dd', function() require('telescope.builtin').diagnostics({bufnr=0}) end, { desc = '[d]iagnostics: [d]ocument' })
+vim.keymap.set('n', '<leader>dd', function() require('telescope.builtin').diagnostics({ bufnr = 0 }) end,
+   { desc = '[d]iagnostics: [d]ocument' })
 -- vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 -- vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 -- vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")

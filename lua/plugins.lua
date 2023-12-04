@@ -130,6 +130,9 @@ return {
    -- https://github.com/nvim-tree/nvim-tree.lua
    { 'nvim-tree/nvim-tree.lua', opts = {} },
 
+   -- https://github.com/jinh0/eyeliner.nvim
+   { 'jinh0/eyeliner.nvim' },
+
    --[[
 
    Focus current block

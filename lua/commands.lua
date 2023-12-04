@@ -45,7 +45,9 @@ M.lsp_commands_on_buffer = function(bufnr)
 
    vim.api.nvim_create_autocmd("BufWritePre", {
       callback = function(_)
-         vim.cmd("Format")
+         if vim.api.nvim_get_current_buf() == bufnr then
+            vim.lsp.buf.format()
+         end
       end
    })
 end
