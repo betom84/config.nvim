@@ -40,10 +40,11 @@ vim.keymap.set("n", "<leader>t", ":NvimTreeFindFileToggle<CR>", { desc = "toggle
 -- GIT
 -- vim.keymap.set("n", "<leader>Gb", vim.cmd.Git, { desc = "[b]rowse" })
 vim.keymap.set("n", "<leader>Gb", ":vertical Git<CR>", { desc = "[b]rowse" })
+vim.keymap.set("n", "<leader>Gp", require('gitsigns').preview_hunk, { desc = "[p]review hunk" })
 vim.keymap.set("n", "<leader>Gs", require('telescope.builtin').git_status, { desc = "[s]tatus" })
 vim.keymap.set("n", "<leader>Gl", require('telescope.builtin').git_commits, { desc = "[l]og" })
 vim.keymap.set("n", "<leader>Gr", require('telescope.builtin').git_branches, { desc = "b[r]anches" })
-vim.keymap.set("n", "<leader>Gt", require('telescope.builtin').git_branches, { desc = "s[t]ash" })
+vim.keymap.set("n", "<leader>Gt", require('telescope.builtin').git_stash, { desc = "s[t]ash" })
 
 -- Diagnostics
 vim.keymap.set('n', '<leader>dp', vim.diagnostic.goto_prev, { desc = '[d]iagnostics: [p]revious message' })
