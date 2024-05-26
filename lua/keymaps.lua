@@ -35,7 +35,7 @@ vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "yank to clipboard" 
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "delete without buffer" })
 
 -- Tree
-vim.keymap.set("n", "<leader>t", ":NvimTreeToggle<CR>", { desc = "toggle [t]ree" })
+vim.keymap.set("n", "<leader>t", ":NvimTreeFindFileToggle<CR>", { desc = "toggle [t]ree" })
 
 -- GIT
 -- vim.keymap.set("n", "<leader>Gb", vim.cmd.Git, { desc = "[b]rowse" })
