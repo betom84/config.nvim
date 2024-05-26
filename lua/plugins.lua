@@ -101,11 +101,11 @@ return {
    -- { 'lukas-reineke/indent-blankline.nvim', main="ibl", opts = {} }
 
    -- Useful plugin to show you pending keybinds.
-   { 'folke/which-key.nvim',             opts = {} },
+   { 'folke/which-key.nvim',           opts = {} },
 
    -- https://github.com/numToStr/Comment.nvim
    -- "gc" to comment visual regions/lines
-   { 'numToStr/Comment.nvim',            opts = {} },
+   { 'numToStr/Comment.nvim',          opts = {} },
 
    -- Git related plugins
    { 'tpope/vim-fugitive' },      -- https://github.com/tpope/vim-fugitive
@@ -113,10 +113,15 @@ return {
    { 'lewis6991/gitsigns.nvim' }, -- https://github.com/lewis6991/gitsigns.nvim
 
    -- Debugging
-   { 'mfussenegger/nvim-dap' },             -- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
-   { 'leoluz/nvim-dap-go' },                -- https://github.com/leoluz/nvim-dap-go
-   { 'theHamsta/nvim-dap-virtual-text' },   -- https://github.com/theHamsta/nvim-dap-virtual-text
-   { 'rcarriga/nvim-dap-ui' },              -- https://github.com/rcarriga/nvim-dap-ui
+   { 'mfussenegger/nvim-dap' },           -- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
+   { 'leoluz/nvim-dap-go' },              -- https://github.com/leoluz/nvim-dap-go
+   { 'theHamsta/nvim-dap-virtual-text' }, -- https://github.com/theHamsta/nvim-dap-virtual-text
+   {
+      'rcarriga/nvim-dap-ui',             -- https://github.com/rcarriga/nvim-dap-ui
+      dependencies = {
+         'nvim-neotest/nvim-nio'
+      },
+   },
    { 'nvim-telescope/telescope-dap.nvim' }, -- https://github.com/nvim-telescope/telescope-dap.nvim
 
    -- https://github.com/iamcco/markdown-preview.nvim
@@ -128,7 +133,7 @@ return {
    },
 
    -- https://github.com/nvim-tree/nvim-tree.lua
-   { 'nvim-tree/nvim-tree.lua', opts = {} },
+   { 'nvim-tree/nvim-tree.lua',          opts = {} },
 
    -- https://github.com/jinh0/eyeliner.nvim
    { 'jinh0/eyeliner.nvim' },
