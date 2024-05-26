@@ -18,8 +18,8 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Keep cursor centered when jumping around
--- vim.keymap.set("n", "<C-d>", "<C-d>zz")
--- vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
@@ -38,7 +38,8 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "delete without buff
 vim.keymap.set("n", "<leader>t", ":NvimTreeToggle<CR>", { desc = "toggle [t]ree" })
 
 -- GIT
-vim.keymap.set("n", "<leader>Gb", vim.cmd.Git, { desc = "[b]rowse" })
+-- vim.keymap.set("n", "<leader>Gb", vim.cmd.Git, { desc = "[b]rowse" })
+vim.keymap.set("n", "<leader>Gb", ":vertical Git<CR>", { desc = "[b]rowse" })
 vim.keymap.set("n", "<leader>Gs", require('telescope.builtin').git_status, { desc = "[s]tatus" })
 vim.keymap.set("n", "<leader>Gl", require('telescope.builtin').git_commits, { desc = "[l]og" })
 vim.keymap.set("n", "<leader>Gr", require('telescope.builtin').git_branches, { desc = "b[r]anches" })
