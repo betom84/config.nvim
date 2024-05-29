@@ -91,6 +91,16 @@ vim.keymap.set('n', '<leader>bB', function() require('dap').set_breakpoint(vim.f
    { desc = 'conditional [b]reakpoint' })
 vim.keymap.set('n', '<leader>bL', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Message: ')) end,
    { desc = '[l]og breakpoint' })
+vim.keymap.set('n', '<leader>bt', function() require('neotest').run.run({ strategy = "dap" }) end,
+   { desc = "current [t]est function" })
+
+-- Tests
+vim.keymap.set('n', '<leader>Tr', require('neotest').run.run, { desc = 'current f[u]nction' })
+vim.keymap.set('n', '<leader>Tf', function() require('neotest').run.run(vim.fn.expand('%')) end,
+   { desc = "current file" })
+vim.keymap.set('n', '<leader>Tp', function() require('neotest').run.run(vim.fn.getcwd()) end, { desc = "project" })
+vim.keymap.set('n', '<leader>Ts', require('neotest').summary.toggle, { desc = "toggle [s]ummary pane" })
+vim.keymap.set('n', '<leader>To', require('neotest').output_panel.toggle, { desc = "toggle [o]utput pane" })
 
 -- LSP
 M.lsp_keymaps_on_buffer = function(bufnr, _)
@@ -135,6 +145,7 @@ require('which-key').register {
    ['<leader>w'] = { name = '[w]orkspace', _ = 'which_key_ignore' },
    ['<leader>d'] = { name = '[d]iagnostics', _ = 'which_key_ignore' },
    ['<leader>b'] = { name = 'de[b]ug', _ = 'which_key_ignore' },
+   ['<leader>T'] = { name = '[T]est', _ = 'which_key_ignore' },
 }
 
 return M

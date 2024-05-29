@@ -124,6 +124,18 @@ return {
    },
    { 'nvim-telescope/telescope-dap.nvim' }, -- https://github.com/nvim-telescope/telescope-dap.nvim
 
+   -- Testing
+   {
+      "nvim-neotest/neotest", -- https://github.com/nvim-neotest/neotest
+      dependencies = {
+         "nvim-neotest/nvim-nio",
+         "antoinemadec/FixCursorHold.nvim",
+
+         -- Adapters
+         "nvim-neotest/neotest-go" -- https://github.com/nvim-neotest/neotest-go
+      },
+   },
+
    -- https://github.com/iamcco/markdown-preview.nvim
    {
       "iamcco/markdown-preview.nvim",
