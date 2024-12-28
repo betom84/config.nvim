@@ -37,6 +37,10 @@ vim.api.nvim_create_autocmd({ 'VimEnter' }, { callback = on_vim_enter })
 -- convenience alias
 vim.api.nvim_create_user_command('Q', function(_) vim.cmd.quitall() end, {})
 
+-- remove background
+vim.api.nvim_set_hl(0, 'Normal', { bg = None })
+--vim.api.nvim_set_hl(0, 'NormalFloat', { bg = None })
+
 -- commands to be registered on LSP attach
 M.lsp_commands_on_buffer = function(bufnr)
    vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)

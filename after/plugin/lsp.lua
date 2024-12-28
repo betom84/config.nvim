@@ -13,11 +13,11 @@ require('mason-lspconfig').setup()
 --  define the property 'filetypes' to the map in question.
 local servers = {
    -- clangd = {},
-   gopls = {},
+   -- gopls = {},
    -- pyright = {},
-   rust_analyzer = {},
+   -- rust_analyzer = {},
    -- tsserver = {},
-   html = { filetypes = { 'html', 'htm' } },
+   -- html = { filetypes = { 'html', 'htm' } },
 
    lua_ls = {
       Lua = {
@@ -54,6 +54,31 @@ mason_lspconfig.setup_handlers {
       }
    end,
 }
+
+-- nixd is not supported by mason
+require('lspconfig').nixd.setup({
+   cmd = { "nixd" },
+   capabilities = capabilities,
+   on_attach = function(_, bufnr)
+      require('keymaps').lsp_keymaps_on_buffer(bufnr, "nixd")
+      require('commands').lsp_commands_on_buffer(bufnr)
+   end,
+   settings = {
+      nixd = {
+         nixpkgs = {
+            expr = "import <nixpkgs> { }",
+         },
+         formatting = {
+            command = "nixfmt"
+         },
+         options = {
+            nixos = {
+               expr = '( builtins.getFlake ("git+file://" + toString ./.) ).nixosConfigurations.nixos.options'
+            }, 
+         },
+      },
+   },
+})
 
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
