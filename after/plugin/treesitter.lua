@@ -1,7 +1,7 @@
 vim.defer_fn(function()
-   require('nvim-treesitter.configs').setup {
+   require('nvim-treesitter').setup {
       -- Add languages to be installed here that you want installed for treesitter
-      ensure_installed = { 'go', 'lua', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
+      ensure_installed = { 'go', 'templ', 'python', 'lua', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
 
       -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
       auto_install = false,
@@ -63,3 +63,9 @@ vim.defer_fn(function()
       },
    }
 end, 0)
+
+vim.filetype.add({
+   extension = {
+      templ = "templ",
+   },
+})

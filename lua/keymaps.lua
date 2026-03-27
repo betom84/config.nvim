@@ -138,14 +138,14 @@ M.lsp_keymaps_on_buffer = function(bufnr, _)
 end
 
 -- Which-Key groups
-require('which-key').register {
-   ['<leader>G'] = { name = '[G]it', _ = 'which_key_ignore' },
-   ['<leader>f'] = { name = '[f]ind', _ = 'which_key_ignore' },
-   ['<leader>s'] = { name = '[s]ymbols', _ = 'which_key_ignore' },
-   ['<leader>w'] = { name = '[w]orkspace', _ = 'which_key_ignore' },
-   ['<leader>d'] = { name = '[d]iagnostics', _ = 'which_key_ignore' },
-   ['<leader>b'] = { name = 'de[b]ug', _ = 'which_key_ignore' },
-   ['<leader>T'] = { name = '[T]est', _ = 'which_key_ignore' },
+require('which-key').add {
+   { "<leader>G", group = "[G]it" },
+   { "<leader>f", group = "[f]ind" },
+   { "<leader>s", group = "[s]ymbols" },
+   { "<leader>w", group = "[w]orkspace" },
+   { "<leader>d", group = "[d]iagnostics" },
+   { "<leader>b", group = "de[b]ug" },
+   { "<leader>T", group = "[T]est" },
 }
 
 return M

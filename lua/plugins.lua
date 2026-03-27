@@ -9,6 +9,7 @@ return {
    -- Highlight, edit, and navigate code
    {
       'nvim-treesitter/nvim-treesitter',
+      tag = 'v0.10.0',
       dependencies = {
          'nvim-treesitter/nvim-treesitter-textobjects',
       },
@@ -31,9 +32,6 @@ return {
          'folke/neodev.nvim',
       },
    },
-
-   -- https://github.com/simrat39/rust-tools.nvim
-   { 'simrat39/rust-tools.nvim' },
 
    {
       -- Autocompletion
